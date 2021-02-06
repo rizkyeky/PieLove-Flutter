@@ -112,7 +112,7 @@ class HomePage extends StatelessWidget {
                                         child: Padding(
                                           padding: const EdgeInsets.all(12),
                                           child: SvgPicture.asset(bloc.category[i]['icon'] as String, 
-                                            color: value == i ? Colors.white : const Color(0xFFFA7854),
+                                            color: value == i ? Colors.white : const Color(0xFF554AB2),
                                           ),
                                         )
                                       ),
@@ -139,53 +139,67 @@ class HomePage extends StatelessWidget {
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           itemCount: 3,
-                          itemBuilder: (context, index) => Container(
-                            margin: const EdgeInsets.only(right: 12),
-                            padding: const EdgeInsets.all(12),
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(12)
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  height: 120,
-                                  clipBehavior: Clip.antiAlias,
-                                  alignment: Alignment.bottomLeft,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12),
-                                    image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(bloc.popular[index]['img'] as String)
-                                    )
-                                  ),
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.7),
-                                      borderRadius: const BorderRadius.only(topRight: Radius.circular(12))
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.only(right: 12),
+                            child: SizedBox(
+                              width: 150,
+                              child: Material(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                clipBehavior: Clip.antiAlias,
+                                child: InkWell(
+                                  onTap: () {},
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12),
+                                          ),
+                                          clipBehavior: Clip.antiAlias,
+                                          child: Ink.image(
+                                            fit: BoxFit.cover,
+                                            image: AssetImage(bloc.popular[index]['img'] as String),
+                                            child: Container(
+                                              height: 120,
+                                              clipBehavior: Clip.antiAlias,
+                                              alignment: Alignment.bottomLeft,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(12),
+                                              ),
+                                              child: Container(
+                                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white.withOpacity(0.7),
+                                                  borderRadius: const BorderRadius.only(topRight: Radius.circular(12))
+                                                ),
+                                                child: const Text('20-30 Min')
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(bloc.popular[index]['name'] as String, style: const TextStyle(
+                                          color: Color(0xFF0E0943),
+                                          fontSize: 14,
+                                        ),),
+                                        const Spacer(),
+                                        Row(
+                                          children: const [
+                                             Icon(Icons.star, color: Color(0xFFFA7854)),
+                                            Text('4.5', style: TextStyle(
+                                              color: Color(0xFFFA7854)
+                                            ),)
+                                          ],
+                                        )
+                                      ],
                                     ),
-                                    child: const Text('20-30 Min')
                                   ),
                                 ),
-                                const Spacer(),
-                                Text(bloc.popular[index]['name'] as String, style: const TextStyle(
-                                  color: Color(0xFF0E0943),
-                                  fontSize: 14,
-                                ),),
-                                const Spacer(),
-                                Row(
-                                  children: const [
-                                     Icon(Icons.star, color: Color(0xFFFA7854)),
-                                    Text('4.5', style: TextStyle(
-                                      color: Color(0xFFFA7854)
-                                    ),)
-                                  ],
-                                )
-                              ],
+                              ),
                             ),
                           ),
                         ),
