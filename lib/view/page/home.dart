@@ -19,12 +19,9 @@ class HomePage extends StatelessWidget {
                     height: 60,
                     child: Row(
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(32),
-                          child: Container(
-                            color: Colors.white,
-                            height: 60,
-                            width: 60,
+                        ClipOval(
+                          child: Image.asset(
+                            'assets/img/profile.png'
                           ),
                         ),
                         const Spacer(),
@@ -32,7 +29,7 @@ class HomePage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: const [
-                            Text('Hello, Shadam', style: TextStyle(
+                            Text('Hello, Rizky Eky', style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
                               fontWeight: FontWeight.bold
@@ -69,9 +66,9 @@ class HomePage extends StatelessWidget {
               ),
             ),
             DraggableScrollableSheet(
-              initialChildSize: 0.72,
+              initialChildSize: 0.7,
               minChildSize: 0.5,
-              maxChildSize: 0.72,
+              maxChildSize: 0.7,
               builder: (context, scrollController) => Container(
                 clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(
@@ -108,6 +105,7 @@ class HomePage extends StatelessWidget {
                                       color: value == i ? const Color(0xFFFA7854) : Colors.white,
                                       borderRadius: BorderRadius.circular(12),
                                       child: InkWell(
+                                        splashColor: const Color(0xFF554AB2).withOpacity(0.5),
                                         onTap: () => update(i),
                                         child: Padding(
                                           padding: const EdgeInsets.all(12),
@@ -148,6 +146,7 @@ class HomePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                                 clipBehavior: Clip.antiAlias,
                                 child: InkWell(
+                                  splashColor: const Color(0xFF554AB2).withOpacity(0.5),
                                   onTap: () {},
                                   child: Padding(
                                     padding: const EdgeInsets.all(12),
@@ -210,6 +209,50 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ],
+        ),
+      ),
+      bottomNavigationBar: SizedBox(
+        height: 85,
+        child: Material(
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ValueBuilder<int>(
+              initialValue: 0,
+              builder: (value, update) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                textBaseline: TextBaseline.alphabetic,
+                children: List.generate(4, (index) {
+                  final icons = [
+                    Icons.home_outlined, Icons.shopping_basket_outlined,
+                    Icons.favorite_outline, Icons.person_outline
+                  ];
+                  final labels = [
+                    'Home', 'Chart', 'Love', 'Profile'
+                  ];
+                  return SizedBox(
+                    height: 45,
+                    width: 45,
+                    child: InkWell(
+                      splashColor: const Color(0xFF554AB2).withOpacity(0.5),
+                      onTap: () => update(index),
+                      borderRadius: BorderRadius.circular(24),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(icons[index], color: value == index ? const Color(0xFFFA7854) : const Color(0xFFAFAFAF),),
+                          Text(labels[index], style: TextStyle(
+                            color: value == index ? const Color(0xFFFA7854) : const Color(0xFFAFAFAF),
+                          )),
+                        ],
+                ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+          ),
         ),
       ),
     );
